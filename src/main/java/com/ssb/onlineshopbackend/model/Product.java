@@ -1,26 +1,30 @@
 package com.ssb.onlineshopbackend.model;
 
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-@Table(name = "products")
+@Table(name = "PRODUCTS")
 public class Product {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id", insertable = false, nullable = false)
-    private long productID;
+    @Column(name = "PRODUCT_ID", insertable = false, nullable = false)
+    @GenericGenerator(name = "seq_product_id", strategy = "com.ssb.onlineshopbackend.util.MyGenerator")
+    @GeneratedValue(generator = "seq_product_id")
+    private String productID;
 
-    @Column(name = "product_category", nullable = false)
+    @Column(name = "PRODUCT_CATEGORY", nullable = false)
     private String productCategory;
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "PRODUCT_NAME", nullable = false)
     private String productName;
 
-    @Column(name = "product_description")
+    @Column(name = "PRODUCT_DESCRIPTIONS", nullable = false)
     private String productDescription;
 
-    @Column(name = "units")
+    @Column(name = "UNITS", nullable = false)
     private int units;
 
     public Product() {
@@ -33,11 +37,11 @@ public class Product {
         this.units = units;
     }
 
-    public long getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(long productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 

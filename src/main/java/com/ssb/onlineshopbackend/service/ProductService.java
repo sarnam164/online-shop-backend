@@ -50,7 +50,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Product getProductById(long productID) {
+    public Product getProductById(String productID) {
         Optional<Product> productDb = this.productRepository.findById(productID);
         if(productDb.isPresent()){
             return productDb.get();
@@ -60,7 +60,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void deleteProduct(long productID) {
+    public void deleteProduct(String productID) {
         Optional<Product> productDb = this.productRepository.findById(productID);
         if(productDb.isPresent()){
             this.productRepository.delete(productDb.get());

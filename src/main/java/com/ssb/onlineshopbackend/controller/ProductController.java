@@ -25,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long productId){
+    public ResponseEntity<Product> getProductById(@PathVariable String productId){
         return  ResponseEntity.ok().body(this.productService.getProductById(productId));
     }
 
@@ -40,13 +40,13 @@ public class ProductController {
     }
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long productId, @RequestBody Product product){
+    public ResponseEntity<Product> updateProduct(@PathVariable String productId, @RequestBody Product product){
         product.setProductID(productId);
         return ResponseEntity.ok().body(this.productService.updateProduct(product));
     }
 
     @DeleteMapping("/products/{productID}")
-    public ResponseEntity<Map<String,Boolean>> deleteProduct(@PathVariable Long productID){
+    public ResponseEntity<Map<String,Boolean>> deleteProduct(@PathVariable String productID){
         this.productService.deleteProduct(productID);
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted",Boolean.TRUE);

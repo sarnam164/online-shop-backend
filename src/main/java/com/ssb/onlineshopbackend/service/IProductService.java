@@ -9,6 +9,6 @@ public interface IProductService {
     List<Product> getAllProductsByCategory(String categoryname);
     Product createProduct(Product product);
     Product updateProduct(Product product);
-    Product getProductById(long productID);
-    void deleteProduct(long productID);
+    Product getProductById(String productID);
+    void deleteProduct(String productID);
 }

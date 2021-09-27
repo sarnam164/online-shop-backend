@@ -2,6 +2,7 @@ package com.ssb.onlineshopbackend.service;
 
 import com.ssb.onlineshopbackend.data.ProductRepository;
 import com.ssb.onlineshopbackend.model.Product;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +16,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
@@ -34,20 +34,12 @@ public class ProductServiceTest {
         productList.add(product1);
         productList.add(product2);
         when(productRepository.findAllByOrderByProductID()).thenReturn(productList);
-        when(productRepository.findAllByProductCategory("Commercial")).thenReturn(productList);
     }
 
     @Test
     public void testGetAllProducts(){
         List<Product> productList = productService.getAllProducts();
         assertEquals(productList.size(),2);
-        assertEquals(productList.get(0).getProductCategory(),"Commercial");
-    }
-
-    @Test
-    public void testGetAllProductsByCategory(){
-        List<Product> productList = productService.getAllProductsByCategory("Commercial");
-        assertEquals(productList.size(),1);
         assertEquals(productList.get(0).getProductCategory(),"Commercial");
     }
 
