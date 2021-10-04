@@ -26,21 +26,35 @@ public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
+    String categoryName = "Space";
+    List<Product> productList;
+    List<Product> productList2;
+
     @BeforeEach
     public void init(){
-        List<Product> productList = new ArrayList<Product>();
+        productList = new ArrayList<Product>();
+        productList2 = new ArrayList<>();
         Product product1 = new Product("Commercial","A350","Passenger Aircraft Family",2);
-        Product product2 = new Product("Defence","A450","Defence",3);
+        Product product2 = new Product("Space","A450","Defence",3);
         productList.add(product1);
         productList.add(product2);
-        when(productRepository.findAllByOrderByProductID()).thenReturn(productList);
+        productList2.add(product2);
     }
 
     @Test
     public void testGetAllProducts(){
+        when(productRepository.findAllByOrderByProductID()).thenReturn(productList);
         List<Product> productList = productService.getAllProducts();
         assertEquals(productList.size(),2);
         assertEquals(productList.get(0).getProductCategory(),"Commercial");
+    }
+
+    @Test
+    public void testGetAllProductsByCategory(){
+        when(productRepository.findAllByProductCategory(categoryName)).thenReturn(productList2);
+        List<Product> list = productService.getAllProductsByCategory(categoryName);
+        assertEquals(list.size(),1);
+        assertEquals(list.get(0).getProductCategory(),"Space");
     }
 
 }
